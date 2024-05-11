@@ -7,6 +7,6 @@ azure-monitor-opentelemetry==1.0.0
 Flask-SQLAlchemy==3.0.5
 SQLAlchemy==2.0.20
 Flask-Migrate==4.0.4
-#psycopg2==2.9.7
+psycopg2==2.9.7
 #psycopg[binary]
 python-dotenv==1.0.1
