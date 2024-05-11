@@ -7,3 +7,4 @@ class Workout(db.Model):
     id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id: int = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     date_time: str = db.Column(db.DateTime, nullable=False)
+    name_workout: str = db.Column(db.String(120), nullable=False)
