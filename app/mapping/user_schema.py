@@ -1,14 +1,12 @@
-from app.models import Repetition
+from app.models import User
 from marshmallow import fields, Schema, post_load
 
-class RepetitionSchema(Schema):
+class UserSchema(Schema):
     id = fields.Integer(dump_only=True)
-    workout_id = fields.Integer(required=True)
-    exercise_id = fields.Integer(required=True)
-    series_number = fields.Integer(required=True)
-    num_repetitions = fields.List(fields.Integer(), required=True)
-    peso = fields.Float()
+    username = fields.String(required=True)
+    password = fields.String(required=True)
+    email = fields.Email(required=True)
 
     @post_load
-    def make_repetition(self, data, **kwargs):
-        return Repetition(**data)
+    def make_user(self, data, **kwargs):
+        return User(**data)
