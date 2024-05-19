@@ -3,7 +3,7 @@ from app.models import db, User, Workout, Exercise, Repetition
 from app.mapping import UserSchema, WorkoutSchema, ExerciseSchema, RepetitionSchema
 
 repetition_bp = Blueprint('repetition', __name__)
-repetition_service = RepetitionService()
+#repetition_service = RepetitionService()
 repetition_schema = RepetitionSchema()
 
 @repetition_bp.route('/', methods=['GET'])

@@ -1,9 +1,9 @@
 from flask import jsonify, Blueprint, request
 from app.models import db, User, Workout, Exercise, Repetition
-#from app.mapping import UserSchema, WorkoutSchema, ExerciseSchema, RepetitionSchema
+from app.mapping import UserSchema, WorkoutSchema, ExerciseSchema, RepetitionSchema
 
 exercise_bp = Blueprint('exercise', __name__)
-exercise_service = ExerciseService()
+#exercise_service = ExerciseService()
 exercise_schema = ExerciseSchema()
 
 
