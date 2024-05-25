@@ -1,46 +1,46 @@
 from flask import jsonify, Blueprint, request
-from app.models import db, User, Workout, Exercise, Repetition
-from app.mapping import UserSchema, WorkoutSchema, ExerciseSchema, RepetitionSchema
+from app.models import db, User, Workout, Excercise, Repetition
+from app.mapping import UserSchema, WorkoutSchema, ExcerciseSchema, RepetitionSchema
+from app.services import ExcerciseService
+excercise_bp = Blueprint('excercise', __name__)
+excercise_service = ExcerciseService()
+excercise_schema = ExcerciseSchema()
 
-exercise_bp = Blueprint('exercise', __name__)
-#exercise_service = ExerciseService()
-exercise_schema = ExerciseSchema()
 
-
-@exercise_bp.route('/', methods=['GET'])
-def get_all_exercises():
-    exercises = Exercise.query.all()
-    resp = exercise_schema.dump(exercises, many=True)
+@excercise_bp.route('/', methods=['GET'])
+def get_all_excercises():
+    excercises = Excercise.query.all()
+    resp = excercise_schema.dump(excercises, many=True)
     return jsonify(resp), 200
 
-@exercise_bp.route('/<int:id>', methods=['GET'])
-def get_exercise(id):
-    exercise = Exercise.query.get_or_404(id)
-    resp = exercise_schema.dump(exercise)
+@excercise_bp.route('/<int:id>', methods=['GET'])
+def get_excercise(id):
+    excercise = Excercise.query.get_or_404(id)
+    resp = excercise_schema.dump(excercise)
     return jsonify(resp), 200
 
-@exercise_bp.route('/', methods=['POST'])
-def create_exercise():
-    exercise_data = request.json
-    exercise = Exercise(name=exercise_data['name'], description=exercise_data['description'])
-    db.session.add(exercise)
+@excercise_bp.route('/', methods=['POST'])
+def create_excercise():
+    excercise_data = request.json
+    excercise = Excercise(name=excercise_data['name'], description=excercise_data['description'])
+    db.session.add(excercise)
     db.session.commit()
-    resp = exercise_schema.dump(exercise)
+    resp = excercise_schema.dump(excercise)
     return jsonify(resp), 201
 
-@exercise_bp.route('/<int:id>', methods=['PUT'])
-def update_exercise(id):
-    exercise = Exercise.query.get_or_404(id)
-    exercise_data = request.json
-    exercise.name = exercise_data['name']
-    exercise.description = exercise_data['description']
+@excercise_bp.route('/<int:id>', methods=['PUT'])
+def update_excercise(id):
+    excercise = Excercise.query.get_or_404(id)
+    excercise_data = request.json
+    excercise.name = excercise_data['name']
+    excercise.description = excercise_data['description']
     db.session.commit()
-    resp = exercise_schema.dump(exercise)
+    resp = excercise_schema.dump(excercise)
     return jsonify(resp), 200
 
-@exercise_bp.route('/<int:id>', methods=['DELETE'])
-def delete_exercise(id):
-    exercise = Exercise.query.get_or_404(id)
-    db.session.delete(exercise)
+@excercise_bp.route('/<int:id>', methods=['DELETE'])
+def delete_excercise(id):
+    excercise = Excercise.query.get_or_404(id)
+    db.session.delete(excercise)
     db.session.commit()
     return jsonify("Ejercicio eliminado correctamente"), 204

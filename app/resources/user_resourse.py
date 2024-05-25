@@ -1,13 +1,14 @@
 from flask import jsonify, Blueprint, request
 from app.models import db, User
-from app.mapping import UserSchema, WorkoutSchema, ExerciseSchema, RepetitionSchema
+from app.mapping import UserSchema, WorkoutSchema, ExcerciseSchema, RepetitionSchema
+from app.services import UserService
 
 user_bp = Blueprint('user', __name__)
-#user_service = UserService()
+user_service = UserService()
 user_schema = UserSchema()
 
 
-@user_bp.route('/', methods=['GET'])
+@user_bp.route('/traer', methods=['GET'])
 def get_all_users():
     users = User.query.all()
     resp = user_schema.dump(users, many=True)

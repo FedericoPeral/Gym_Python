@@ -1,9 +1,9 @@
 from flask import jsonify, Blueprint, request
-from app.models import db, User, Workout, Exercise, Repetition
-from app.mapping import UserSchema, WorkoutSchema, ExerciseSchema, RepetitionSchema
-
+from app.models import db, User, Workout, Excercise, Repetition
+from app.mapping import UserSchema, WorkoutSchema, ExcerciseSchema, RepetitionSchema
+from app.services import WorkoutService
 workout_bp = Blueprint('workout', __name__)
-#workout_service = WorkoutService()
+workout_service = WorkoutService()
 workout_schema = WorkoutSchema()
 
 @workout_bp.route('/', methods=['GET'])

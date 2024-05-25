@@ -1,9 +1,9 @@
 from flask import jsonify, Blueprint, request
-from app.models import db, User, Workout, Exercise, Repetition
-from app.mapping import UserSchema, WorkoutSchema, ExerciseSchema, RepetitionSchema
-
+from app.models import db, User, Workout, Excercise, Repetition
+from app.mapping import UserSchema, WorkoutSchema, ExcerciseSchema, RepetitionSchema
+from app.services import RepetitionService
 repetition_bp = Blueprint('repetition', __name__)
-#repetition_service = RepetitionService()
+repetition_service = RepetitionService()
 repetition_schema = RepetitionSchema()
 
 @repetition_bp.route('/', methods=['GET'])
@@ -21,7 +21,7 @@ def get_repetition(id):
 @repetition_bp.route('/', methods=['POST'])
 def create_repetition():
     repetition_data = request.json
-    repetition = Repetition(workout_id=repetition_data['workout_id'], exercise_id=repetition_data['exercise_id'], series_number=repetition_data['series_number'], num_repetitions=repetition_data['num_repetitions'], peso=repetition_data['peso'])
+    repetition = Repetition(workout_id=repetition_data['workout_id'], excercise_id=repetition_data['excercise_id'], series_number=repetition_data['series_number'], num_repetitions=repetition_data['num_repetitions'], peso=repetition_data['peso'])
     db.session.add(repetition)
     db.session.commit()
     resp = repetition_schema.dump(repetition)
@@ -32,7 +32,7 @@ def update_repetition(id):
     repetition = Repetition.query.get_or_404(id)
     repetition_data = request.json
     repetition.workout_id = repetition_data['workout_id']
-    repetition.exercise_id = repetition_data['exercise_id']
+    repetition.excercise_id = repetition_data['excercise_id']
     repetition.series_number = repetition_data['series_number']
     repetition.num_repetitions = repetition_data['num_repetitions']
     repetition.peso = repetition_data['peso']
