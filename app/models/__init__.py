@@ -1,4 +1,4 @@
 from .user import User
-from .exercise import Exercise
+from .excercise import Excercise
 from .workout import Workout
 from .repetition import Repetition
